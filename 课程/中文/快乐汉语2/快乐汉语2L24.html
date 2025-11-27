@@ -26,7 +26,21 @@
             margin: 0 auto;
         }
 
-        /* ——— Header y footer propios eliminados; ahora se inyectan ——— */
+        /* (El <header> original se elimina; mantenemos estilos de contenido) */
+        .subtitle {
+            font-size: 1.3rem;
+            color: #6a11cb;
+            margin-bottom: 15px;
+            text-align:center;
+        }
+        .instructions {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            border-left: 5px solid #2196f3;
+        }
 
         .tabs {
             display: flex;
@@ -66,7 +80,6 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             margin-bottom: 30px;
-            position: relative;
         }
 
         .tab-content.active {
@@ -316,7 +329,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: relative;
         }
 
         .match-card.chinese-card {
@@ -349,51 +361,7 @@
             color: #f0f0f0;
         }
 
-        .controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            background: linear-gradient(to right, #4776E6, #8E54E9);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            margin: 0 12px 15px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn:disabled {
-            background: linear-gradient(to right, #cccccc, #999999);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .completion-message {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            font-size: 1.5rem;
-            color: #2575fc;
-            display: none;
-        }
-
-        /* 响应式设计 */
+        /* Responsive */
         @media (max-width: 1024px) {
             .game-board, .match-game-board {
                 grid-template-columns: repeat(5, 1fr);
@@ -441,11 +409,10 @@
 <div id="header"></div>
 
 <div class="container">
-    <!-- Título/subtítulo locales (opcional) -->
+    <!-- Título/s y nota -->
     <h1 style="text-align:center;color:white;margin-bottom:10px;">中文词组学习卡片</h1>
-    <p style="text-align:center;color:#f0f0f0;font-size:1.1rem;margin-bottom:25px;">Tarjetas de Aprendizaje de Palabras Chinas</p>
-
-    <div class="instructions" style="background:#e3f2fd;border-left:5px solid #2196f3;padding:15px;border-radius:10px;margin:20px 0;font-size:1.05rem;">
+    <p class="subtitle">Tarjetas de Aprendizaje de Palabras Chinas</p>
+    <div class="instructions">
         <p><i class="fas fa-lightbulb"></i> Haz clic en las tarjetas para voltearlas y ver la traducción. Usa el altavoz para escuchar la pronunciación.</p>
     </div>
 
@@ -464,16 +431,20 @@
     <div id="game" class="tab-content">
         <h2>Juego de Memoria - Emparejar Chino y Español</h2>
         <p>Encuentra todas las parejas correspondientes entre chino y español</p>
+
         <div class="game-info">
             <div>Parejas: <span id="matches">0</span>/<span id="total-pairs">10</span></div>
             <div>Intentos: <span id="attempts">0</span></div>
             <div>Tiempo: <span id="timer">0</span> segundos</div>
         </div>
+
         <div class="game-board" id="game-board"></div>
+
         <div class="completion-message" id="completion-message">
             <p>¡Felicidades! Has completado el juego.</p>
             <p>Tiempo: <span id="final-time">0</span> segundos | Intentos: <span id="final-attempts">0</span></p>
         </div>
+
         <div class="controls">
             <button class="btn" id="start-game">Comenzar Juego</button>
             <button class="btn" id="reset-game" disabled>Reiniciar</button>
@@ -483,16 +454,20 @@
     <div id="match-game" class="tab-content">
         <h2>Juego de Emparejar - Encuentra las Parejas</h2>
         <p>Haz clic en las tarjetas para encontrar las parejas entre chino y español</p>
+
         <div class="game-info">
             <div>Parejas: <span id="match-matches">0</span>/<span id="match-total-pairs">10</span></div>
             <div>Intentos: <span id="match-attempts">0</span></div>
             <div>Tiempo: <span id="match-timer">0</span> segundos</div>
         </div>
+
         <div class="match-game-board" id="match-game-board"></div>
+
         <div class="completion-message" id="match-completion-message">
             <p>¡Felicidades! Has completado el juego de emparejar.</p>
             <p>Tiempo: <span id="match-final-time">0</span> segundos | Intentos: <span id="match-final-attempts">0</span></p>
         </div>
+
         <div class="controls">
             <button class="btn" id="start-match-game">Comenzar Juego</button>
             <button class="btn" id="reset-match-game" disabled>Reiniciar</button>
@@ -503,7 +478,7 @@
 <!-- Footer compartido -->
 <div id="footer"></div>
 
-<!-- Audio -->
+<!-- 音频元素 -->
 <audio id="flip-sound" preload="auto">
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
 </audio>
@@ -517,26 +492,26 @@
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-game-ball-tap-2076.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Inserta header/footer -->
-<script src="include.js"></script>
+<!-- Carga de header/footer -->
+<script src="../../../include.js"></script>
 
-<!-- JS del juego (sin cambios funcionales) -->
 <script>
-    // Datos de palabras chinas (中文, 拼音, 西班牙语) - 日常生活主题
-    const chineseWords = [
-        { chinese: "手机", pinyin: "shǒu jī", spanish: "Teléfono móvil" },
-        { chinese: "广告", pinyin: "guǎng gào", spanish: "Anuncio" },
-        { chinese: "地铁", pinyin: "dì tiě", spanish: "Metro" },
-        { chinese: "收音机", pinyin: "shōu yīn jī", spanish: "Radio" },
-        { chinese: "中心", pinyin: "zhōng xīn", spanish: "Centro" },
-        { chinese: "市中心", pinyin: "shì zhōng xīn", spanish: "Centro de la ciudad" },
-        { chinese: "手表", pinyin: "shǒu biǎo", spanish: "Reloj de pulsera" },
-        { chinese: "没有", pinyin: "méi yǒu", spanish: "No tener" },
-        { chinese: "想", pinyin: "xiǎng", spanish: "Pensar/Querer" },
-        { chinese: "漂亮", pinyin: "piào liang", spanish: "Bonito" }
-    ];
+    // Datos de palabras chinas (中文, 拼音, 西班牙语)
+const chineseWords = [
+    { chinese: "中秋", pinyin: "Zhōngqiū", spanish: "Festival de Medio Otoño" },
+    { chinese: "月亮", pinyin: "yuèliang", spanish: "Luna" },
+    { chinese: "粽子", pinyin: "zòngzi", spanish: "Zongzi" },
+    { chinese: "除了", pinyin: "chúle", spanish: "Además de / Excepto" },
+    { chinese: "月饼", pinyin: "yuèbǐng", spanish: "Pastel de luna" },
+    { chinese: "端午节", pinyin: "Duānwǔjié", spanish: "Festival del Bote del Dragón" },
+    { chinese: "好吃", pinyin: "hǎochī", spanish: "Delicioso" },
+    { chinese: "跟", pinyin: "gēn", spanish: "Con" },
+    { chinese: "商店", pinyin: "shāngdiàn", spanish: "Tienda" },
+    { chinese: "买", pinyin: "mǎi", spanish: "Comprar" }
+];
 
-    // Funcionalidad de pestañas
+
+    // Pestañas
     document.querySelectorAll('.tab-button').forEach(button => {
         button.addEventListener('click', () => {
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
@@ -546,7 +521,7 @@
         });
     });
 
-    // Generar tarjetas de vocabulario
+    // Flashcards
     function generateFlashcards() {
         const container = document.getElementById('flashcards-container');
         container.innerHTML = '';
@@ -594,16 +569,16 @@
     // Voz
     function speakText(text) {
         if ('speechSynthesis' in window) {
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'zh-CN';
-            u.rate = 0.8;
-            window.speechSynthesis.speak(u);
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
         } else {
-            alert('Tu navegador no soporta la función de voz. Usa Chrome o Edge.');
+            alert('Tu navegador no soporta la función de voz. Por favor, usa Chrome o Edge.');
         }
     }
 
-    // ====== Juego de memoria ======
+    // ===== Juego de memoria =====
     let gameStarted = false;
     let flippedCards = [];
     let matches = 0;
@@ -627,35 +602,49 @@
         });
         shuffleArray(cards);
         cards.forEach(card => {
-            const el = document.createElement('div');
-            el.className = 'card';
-            el.dataset.id = card.id;
-            el.dataset.type = card.type;
-            el.dataset.pair = card.pair;
-            el.innerHTML = (card.type === 'chinese')
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.dataset.id = card.id;
+            cardElement.dataset.type = card.type;
+            cardElement.dataset.pair = card.pair;
+            cardElement.innerHTML = (card.type === 'chinese')
                 ? `<div class="card-inner">
                         <div class="card-front">
-                            <div class="card-logo"><div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:white;font-weight:bold;font-size:0.6rem;text-align:center;">华西<br>书院</div></div>
+                            <div class="card-logo">
+                                <div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:white;font-weight:bold;font-size:0.6rem;text-align:center;">
+                                    华西<br>书院
+                                </div>
+                            </div>
                             <i class="fas fa-question"></i>
                         </div>
                         <div class="card-back">${card.content}</div>
-                      </div>`
+                       </div>`
                 : `<div class="card-inner">
                         <div class="card-front">
-                            <div class="card-logo"><div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:white;font-weight:bold;font-size:0.6rem;text-align:center;">华西<br>书院</div></div>
+                            <div class="card-logo">
+                                <div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:white;font-weight:bold;font-size:0.6rem;text-align:center;">
+                                    华西<br>书院
+                                </div>
+                            </div>
                             <i class="fas fa-question"></i>
                         </div>
                         <div class="card-back">${card.content}<div class="game-pinyin">${card.pinyin}</div></div>
-                      </div>`;
-            el.addEventListener('click', () => flipCard(el));
-            gameBoard.appendChild(el);
+                       </div>`;
+            cardElement.addEventListener('click', () => flipCard(cardElement));
+            gameBoard.appendChild(cardElement);
         });
         document.getElementById('total-pairs').textContent = gameWords.length;
         document.getElementById('matches').textContent = '0';
         document.getElementById('attempts').textContent = '0';
     }
 
-    function shuffleArray(arr){ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+    function shuffleArray(array){
+        for (let i=array.length-1;i>0;i--){
+            const j = Math.floor(Math.random()*(i+1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
     function flipCard(card) {
         if (!gameStarted || card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) return;
@@ -670,21 +659,25 @@
     }
 
     function checkForMatch() {
-        const [a, b] = flippedCards;
-        if (a.dataset.id === b.dataset.id && a.dataset.type !== b.dataset.type) {
-            a.classList.add('matched');
-            b.classList.add('matched');
+        const [card1, card2] = flippedCards;
+        if (card1.dataset.id === card2.dataset.id && card1.dataset.type !== card2.dataset.type) {
+            card1.classList.add('matched');
+            card2.classList.add('matched');
             matches++;
             document.getElementById('matches').textContent = matches;
             try { matchSound.currentTime = 0; matchSound.play().catch(()=>{}); } catch(e){}
             flippedCards = [];
             if (matches === parseInt(document.getElementById('total-pairs').textContent)) endGame();
         } else {
-            setTimeout(() => { a.classList.remove('flipped'); b.classList.remove('flipped'); flippedCards = []; }, 1000);
+            setTimeout(() => {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                flippedCards = [];
+            }, 1000);
         }
     }
 
-    function startGame(){
+    function startGame() {
         if (gameStarted) return;
         gameStarted = true; matches = 0; attempts = 0; timer = 0;
         document.getElementById('matches').textContent = '0';
@@ -693,27 +686,33 @@
         document.getElementById('start-game').disabled = true;
         document.getElementById('reset-game').disabled = false;
         document.getElementById('completion-message').style.display = 'none';
-        timerInterval = setInterval(()=>{ timer++; document.getElementById('timer').textContent = timer; },1000);
+        timerInterval = setInterval(() => {
+            timer++;
+            document.getElementById('timer').textContent = timer;
+        }, 1000);
         generateGameCards();
     }
 
-    function endGame(){
-        clearInterval(timerInterval); gameStarted = false;
+    function endGame() {
+        clearInterval(timerInterval);
+        gameStarted = false;
         try { winSound.currentTime = 0; winSound.play().catch(()=>{}); } catch(e){}
         document.getElementById('final-time').textContent = timer;
         document.getElementById('final-attempts').textContent = attempts;
         document.getElementById('completion-message').style.display = 'block';
     }
 
-    function resetGame(){
-        clearInterval(timerInterval); gameStarted = false; flippedCards = [];
+    function resetGame() {
+        clearInterval(timerInterval);
+        gameStarted = false;
+        flippedCards = [];
         document.getElementById('start-game').disabled = false;
         document.getElementById('reset-game').disabled = true;
         document.getElementById('completion-message').style.display = 'none';
         generateGameCards();
     }
 
-    // ====== Juego de emparejar ======
+    // ===== Juego de emparejar =====
     let matchGameStarted = false;
     let selectedCards = [];
     let matchMatches = 0;
@@ -722,83 +721,100 @@
     let matchTimerInterval;
 
     function generateMatchGameCards() {
-        const board = document.getElementById('match-game-board');
-        board.innerHTML = '';
+        const gameBoard = document.getElementById('match-game-board');
+        gameBoard.innerHTML = '';
         const gameWords = [...chineseWords];
         const cards = [];
-        gameWords.forEach(w=>{
-            cards.push({ type:'chinese', content:w.chinese, pair:w.spanish, pinyin:w.pinyin, id:w.chinese });
-            cards.push({ type:'spanish', content:w.spanish, pair:w.chinese, pinyin:w.pinyin, id:w.chinese });
+        gameWords.forEach(word => {
+            cards.push({ type: 'chinese', content: word.chinese, pair: word.spanish, pinyin: word.pinyin, id: word.chinese });
+            cards.push({ type: 'spanish', content: word.spanish, pair: word.chinese, pinyin: word.pinyin, id: word.chinese });
         });
         shuffleArray(cards);
-        cards.forEach(card=>{
-            const el = document.createElement('div');
-            el.className = `match-card ${card.type}-card`;
-            el.dataset.id = card.id; el.dataset.type = card.type; el.dataset.pair = card.pair;
-            el.innerHTML = (card.type==='chinese')
+        cards.forEach(card => {
+            const cardElement = document.createElement('div');
+            cardElement.className = `match-card ${card.type}-card`;
+            cardElement.dataset.id = card.id;
+            cardElement.dataset.type = card.type;
+            cardElement.dataset.pair = card.pair;
+            cardElement.innerHTML = (card.type === 'chinese')
                 ? `<div>${card.content}</div>`
                 : `<div>${card.content}</div><div class="match-card-pinyin">${card.pinyin}</div>`;
-            el.addEventListener('click',()=>selectMatchCard(el));
-            board.appendChild(el);
+            cardElement.addEventListener('click', () => selectMatchCard(cardElement));
+            gameBoard.appendChild(cardElement);
         });
         document.getElementById('match-total-pairs').textContent = gameWords.length;
         document.getElementById('match-matches').textContent = '0';
         document.getElementById('match-attempts').textContent = '0';
     }
 
-    function selectMatchCard(card){
-        if (!matchGameStarted || card.classList.contains('matched') || card.classList.contains('selected') || selectedCards.length>=2) return;
+    function selectMatchCard(card) {
+        if (!matchGameStarted || card.classList.contains('matched') || card.classList.contains('selected') || selectedCards.length >= 2) return;
         card.classList.add('selected');
         selectedCards.push(card);
         try { selectSound.currentTime = 0; selectSound.play().catch(()=>{}); } catch(e){}
-        if (selectedCards.length===2){
+        if (selectedCards.length === 2) {
             matchAttempts++;
             document.getElementById('match-attempts').textContent = matchAttempts;
             checkMatchForMatch();
         }
     }
 
-    function checkMatchForMatch(){
-        const [a,b] = selectedCards;
-        if (a.dataset.id===b.dataset.id && a.dataset.type!==b.dataset.type){
-            setTimeout(()=>{
-                a.classList.add('matched'); b.classList.add('matched');
-                matchMatches++; document.getElementById('match-matches').textContent = matchMatches;
+    function checkMatchForMatch() {
+        const [card1, card2] = selectedCards;
+        if (card1.dataset.id === card2.dataset.id && card1.dataset.type !== card2.dataset.type) {
+            setTimeout(() => {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchMatches++;
+                document.getElementById('match-matches').textContent = matchMatches;
                 try { matchSound.currentTime = 0; matchSound.play().catch(()=>{}); } catch(e){}
                 selectedCards = [];
                 if (matchMatches === parseInt(document.getElementById('match-total-pairs').textContent)) endMatchGame();
-            },500);
+            }, 500);
         } else {
-            setTimeout(()=>{ a.classList.remove('selected'); b.classList.remove('selected'); selectedCards = []; },1000);
+            setTimeout(() => {
+                card1.classList.remove('selected');
+                card2.classList.remove('selected');
+                selectedCards = [];
+            }, 1000);
         }
     }
 
-    function startMatchGame(){
+    function startMatchGame() {
         if (matchGameStarted) return;
-        matchGameStarted = true; matchMatches=0; matchAttempts=0; matchTimer=0;
-        document.getElementById('match-matches').textContent='0';
-        document.getElementById('match-attempts').textContent='0';
-        document.getElementById('match-timer').textContent='0';
+        matchGameStarted = true;
+        matchMatches = 0;
+        matchAttempts = 0;
+        matchTimer = 0;
+        document.getElementById('match-matches').textContent = '0';
+        document.getElementById('match-attempts').textContent = '0';
+        document.getElementById('match-timer').textContent = '0';
         document.getElementById('start-match-game').disabled = true;
         document.getElementById('reset-match-game').disabled = false;
         document.getElementById('match-completion-message').style.display = 'none';
-        matchTimerInterval = setInterval(()=>{ matchTimer++; document.getElementById('match-timer').textContent = matchTimer; },1000);
+        matchTimerInterval = setInterval(() => {
+            matchTimer++;
+            document.getElementById('match-timer').textContent = matchTimer;
+        }, 1000);
         generateMatchGameCards();
     }
 
-    function endMatchGame(){
-        clearInterval(matchTimerInterval); matchGameStarted=false;
+    function endMatchGame() {
+        clearInterval(matchTimerInterval);
+        matchGameStarted = false;
         try { winSound.currentTime = 0; winSound.play().catch(()=>{}); } catch(e){}
         document.getElementById('match-final-time').textContent = matchTimer;
         document.getElementById('match-final-attempts').textContent = matchAttempts;
         document.getElementById('match-completion-message').style.display = 'block';
     }
 
-    function resetMatchGame(){
-        clearInterval(matchTimerInterval); matchGameStarted=false; selectedCards=[];
-        document.getElementById('start-match-game').disabled=false;
-        document.getElementById('reset-match-game').disabled=true;
-        document.getElementById('match-completion-message').style.display='none';
+    function resetMatchGame() {
+        clearInterval(matchTimerInterval);
+        matchGameStarted = false;
+        selectedCards = [];
+        document.getElementById('start-match-game').disabled = false;
+        document.getElementById('reset-match-game').disabled = true;
+        document.getElementById('match-completion-message').style.display = 'none';
         generateMatchGameCards();
     }
 
