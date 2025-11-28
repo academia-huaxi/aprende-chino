@@ -1,0 +1,70 @@
+/* Scope everything under .game-page to avoid interfering with global site CSS */
+.game-page {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.hidden { display:none; }
+
+/* Level1 Grid */
+.game-page #grid {
+    display:grid;
+    grid-template-columns:repeat(4, minmax(80px,1fr));
+    gap:14px;
+    max-width:80%;
+    margin:30px auto;
+}
+
+/* Level1 cards */
+.game-page .card {
+    padding:24px;
+    font-size:24px;
+    background:#f0f0f0;
+    border-radius:12px;
+    cursor:pointer;
+    user-select:none;
+    transition:0.25s;
+}
+
+/* Timer & progress */
+.game-page #timer,
+.game-page #progress {
+    font-size:20px;
+    margin:10px;
+}
+
+/* Level 2 input */
+.game-page #level2 input {
+    padding:8px;
+    font-size:18px;
+}
+
+/* Buttons inside game pages */
+.game-page button {
+    padding:8px 15px;
+    margin:5px;
+    font-size:16px;
+}
+
+.game-page #menu button {
+    min-width:160px;
+}
+
+.invisible { visibility:hidden; }
+
+/* Progress bar */
+.game-page #barBox {
+    width: 80%;
+    height: 20px;
+    background: #ddd;
+    margin: 10px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.game-page #bar {
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+    transition: width 0.4s;
+}
